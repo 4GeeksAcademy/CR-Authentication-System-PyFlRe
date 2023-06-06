@@ -46,7 +46,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 };
 
                 try {
-                    const resp = await fetch("https://crob001-opulent-waddle-g99pg94v9x7cjj7-3001.preview.app.github.dev/api/login", opts);
+                    const resp = await fetch("https://crob001-opulent-waddle-g99pg94v9x7cjj7-3001.preview.app.github.dev/api/token", opts);
                     if (resp.status !== 200) {
                         alert("There has been some error");
                         return false;

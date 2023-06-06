@@ -11,7 +11,7 @@ export const Login = () => {
     const [password, setPassword] = useState("");
 
     const token = sessionStorage.getItem("token");
-    console.log("This is your token", store.token);
+    console.log("This is your token", token);
 
     const handleClick = () => {
         actions.login(email, password);
@@ -33,13 +33,13 @@ export const Login = () => {
                         type="text"
                         placeholder="email"
                         value={email}
-                        onChange={e => setEmail(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <input
                         type="password"
                         placeholder="password"
                         value={password}
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                     <button onClick={handleClick}>Login</button>
                 </div>
