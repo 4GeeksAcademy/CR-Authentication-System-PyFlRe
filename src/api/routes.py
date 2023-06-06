@@ -19,17 +19,17 @@ def create_token():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
-@api.route('/login', methods=['POST'])
-def login():
-    body = request.get_json ( force = True)
-    email = body['email']
-    password = hashlib.sha256(body['password'].encode("utf-8")).hexdigest()
-    print(password)
-    new_user = User(email = email, password = password)
-    db.session.add(new_user)
-    db.session.commit()
-    access_token = create_access_token(identity = email)
-    return jsonify(access_token = access_token)
+# @api.route('/login', methods=['POST'])
+# def login():
+#     body = request.get_json ( force = True)
+#     email = body['email']
+#     password = hashlib.sha256(body['password'].encode("utf-8")).hexdigest()
+#     print(password)
+#     new_user = User(email = email, password = password)
+#     db.session.add(new_user)
+#     db.session.commit()
+#     access_token = create_access_token(identity = email)
+#     return jsonify(access_token = access_token)
 
 @api.route('/hello', methods=["GET"])
 @jwt_required()
