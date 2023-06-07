@@ -70,7 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 };
                 try {
-                    const resp = await fetch("https://crob001-opulent-waddle-g99pg94v9x7cjj7-3001.preview.app.github.dev", opts);
+                    const resp = await fetch("https://3001-4geeksacade-crauthentic-xglz5fbliet.ws-us98.gitpod.io/api/hello", opts);
                     if (resp.status !== 200) {
                         console.log("Error loading message from backend");
                         return;

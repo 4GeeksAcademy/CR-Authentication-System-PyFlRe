@@ -36,6 +36,6 @@ def create_token():
 def get_hello():
     email = get_jwt_identity()
     dictionary = {
-        "message": "Hello World " + email
+        "message": "Hello World " + " " + email
     }
     return jsonify(dictionary)

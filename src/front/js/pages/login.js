@@ -17,16 +17,16 @@ export const Login = () => {
         actions.login(email, password);
     };
 
-    if (store.token && store.token !== "" && store.token !== undefined) {
-        navigate("/");
-    }
-
     return (
         <div className="text-center mt-5">
             <h1>Login</h1>
 
-            {token && token !== "" && token !== undefined ? (
-                <div>You are logged in with this token: {token}</div>
+            {token && token != "" && token != undefined ? (
+                <>
+                <p> "You are logged in with this token" {token} </p>
+                <button onClick={() => navigate("/")}>Go To Home</button>
+                </>
+                
             ) : (
                 <div>
                     <input
