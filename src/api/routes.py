@@ -7,7 +7,9 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 
+
 api = Blueprint('api', __name__)
+       
 
 @api.route('/token', methods=["POST"])
 def create_token():
@@ -19,23 +21,29 @@ def create_token():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
-# @api.route('/login', methods=['POST'])
-# def login():
-#     body = request.get_json ( force = True)
-#     email = body['email']
-#     password = hashlib.sha256(body['password'].encode("utf-8")).hexdigest()
-#     print(password)
-#     new_user = User(email = email, password = password)
-#     db.session.add(new_user)
-#     db.session.commit()
-#     access_token = create_access_token(identity = email)
-#     return jsonify(access_token = access_token)
+@api.route('/login', methods=['POST']) 
+def login():
+    data = request.json
+    
+    user = User.query.filter_by(email=data["email"], password=data["password"]).first()
+    if not user:
+        return jsonify({"msg": "Bad username or password"}), 401
+    access_token=create_access_token(identity=user.email)
+    
+    return jsonify({"token": access_token, "user": user.serialize()})
 
-@api.route('/hello', methods=["GET"])
-@jwt_required()
-def get_hello():
-    email = get_jwt_identity()
-    dictionary = {
-        "message": "Hello World " + " " + email
-    }
-    return jsonify(dictionary)
+@api.route("/register", methods=["POST"])
+def register():
+    data = request.json
+
+    user = User.query.filter_by(email=data["email"]).first()
+    if user:
+        return jsonify({"msg": "User already exists."}), 401
+    new_user = User(
+        password=data["password"],
+        email=data["email"],
+    )
+    db.session.add(new_user) 
+    db.session.commit()
+
+    return jsonify({"msg" : "Success or Whatever" })

@@ -46,7 +46,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 };
 
                 try {
-                    const resp = await fetch("https://3001-4geeksacade-crauthentic-xglz5fbliet.ws-us98.gitpod.io/api/token", opts);
+                    const resp = await fetch("https://3001-4geeksacade-crauthentic-xglz5fbliet.ws-us98.gitpod.io/api/login", opts);
                     if (resp.status !== 200) {
                         alert("There has been some error");
                         return false;
@@ -59,6 +59,33 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return true;
                 } catch (error) {
                     console.error("There has been an error logging in", error);
+                }
+            },
+
+            register: async (email, password) => {
+                const opts = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                    }),
+                };
+
+                try {
+                    const resp = await fetch("https://3001-4geeksacade-crauthentic-xglz5fbliet.ws-us98.gitpod.io/api/register", opts);
+                    if (resp.status !== 200) {
+                        alert("There has been some error");
+                        return false;
+                    }
+
+                    const data = await resp.json();
+                    console.log("This came from the backend", data);
+                    return true;
+                } catch (error) {
+                    console.error("There has been an error registering", error);
                 }
             },
 
